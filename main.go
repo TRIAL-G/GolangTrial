@@ -1,4 +1,4 @@
-//connecting to server 
+
 package main
 
 import ("fmt"
@@ -6,14 +6,28 @@ import ("fmt"
 		"net/http"
 
 )
-
-func helloHandler(w http.ResponseWriter,r *http.Request){
-	if r.URL.Path := "hello"{
-		http,Error(w, "404 not ")
+func formHandler(w http.ResponseWriter, r *http.Request){
+	if err := r.ParseForm(): err != nil{
+		fmt.fprintf(w, "ParseForm() err: %v", err)
+		return
 	}
+	
 
 }
 
+func helloHandler(w http.ResponseWriter,r *http.Request){
+if r.URL.Path := "hello"{
+		http.Error(w, "404 not ", http.statusNotFound)
+		return
+	}
+
+
+if r.Method != "GET"{
+	http.Error("method is not supported", http.statusNotFound)
+	return
+}
+fmt.fprintf(w, "Hello!")
+}
 func main{
 	fileserver := http.Fileserver(http.dir("./static"))
 	http.Handle("/", fileserver)
@@ -25,3 +39,4 @@ func main{
 		log.Fatal(err)
 	}
 }
+
