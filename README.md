@@ -1,2 +1,2 @@
 # GolangTrial
-This repositories is me trting to learn Go programming language.
+This repositories is me trying to learn Go programming language.
